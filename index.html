@@ -1,0 +1,834 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>School Nation - Find & Compare Schools</title>
+    <style>
+        :root {
+            --primary-color: #3498db;
+            --secondary-color: #f8f9fa;
+            --accent-color: #2980b9;
+            --text-color: #333;
+            --light-text: #777;
+            --border-color: #e0e0e0;
+            --white: #ffffff;
+            --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Arial', sans-serif;
+        }
+
+        body {
+            color: var(--text-color);
+            background-color: var(--white);
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        header {
+            background-color: var(--white);
+            box-shadow: var(--shadow);
+            padding: 20px 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+            color: var(--primary-color);
+            text-decoration: none;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 20px;
+        }
+
+        .nav-links a {
+            color: var(--text-color);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary-color);
+        }
+
+        .hero {
+            padding: 60px 0;
+            text-align: center;
+            background-color: var(--secondary-color);
+        }
+
+        .hero h1 {
+            font-size: 36px;
+            margin-bottom: 20px;
+            color: var(--text-color);
+        }
+
+        .search-container {
+            max-width: 600px;
+            margin: 0 auto 30px;
+            position: relative;
+        }
+
+        .search-input {
+            width: 100%;
+            padding: 15px 20px;
+            border: 1px solid var(--border-color);
+            border-radius: 30px;
+            font-size: 16px;
+            outline: none;
+            box-shadow: var(--shadow);
+        }
+
+        .search-button {
+            position: absolute;
+            right: 5px;
+            top: 5px;
+            background-color: var(--primary-color);
+            color: var(--white);
+            border: none;
+            border-radius: 25px;
+            padding: 10px 20px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .search-button:hover {
+            background-color: var(--accent-color);
+        }
+
+        .city-buttons {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-bottom: 30px;
+        }
+        
+
+        .city-btn {
+            padding: 8px 16px;
+            background-color: var(--white);
+            border: 1px solid var(--border-color);
+            border-radius: 20px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .city-select {
+        
+            width: 35%;
+            border: 1px solid #d1d5db;
+            font-family: inherit;
+            font-size: 1rem;
+             border-radius: 25px;
+            padding: 10px 20px;
+            transition: border-color 0.2s;
+        }
+        
+
+        .city-btn:hover, .city-btn.active {
+            background-color: var(--primary-color);
+            color: var(--white);
+            border-color: var(--primary-color);
+        }
+
+        .filter-container {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+        }
+
+        .filter-option {
+             border-radius: 25px;
+            padding: 10px 20px;
+            background-color:white;
+            border: 1px solid var(--border-color);
+            cursor: pointer;
+        }
+
+        .filter-option select {
+            background: transparent;
+            border: none;
+            outline: none;
+            cursor: pointer;
+        }
+
+        .schools-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 30px;
+            margin: 40px 0;
+        }
+
+        .school-card {
+            background-color: var(--white);
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: transform 0.3s;
+            cursor: pointer;
+        }
+
+        .school-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .school-image {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+
+        .school-info {
+            padding: 20px;
+        }
+
+        .school-name {
+            font-size: 20px;
+            margin-bottom: 10px;
+            color: var(--text-color);
+        }
+
+        .school-city {
+            color: var(--light-text);
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .school-details {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 15px;
+        }
+
+        .detail-item {
+            text-align: center;
+        }
+
+        .detail-label {
+            font-size: 12px;
+            color: var(--light-text);
+        }
+
+        .detail-value {
+            font-weight: bold;
+            color: var(--primary-color);
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.7);
+            z-index: 200;
+            overflow-y: auto;
+        }
+
+        .modal-content {
+            background-color: var(--white);
+            margin: 50px auto;
+            max-width: 800px;
+            border-radius: 8px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .close-modal {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            font-size: 40px;
+            color: rgb(0, 0, 0);
+            cursor: pointer;
+            z-index: 1;
+        }
+
+        .modal-header {
+            position: relative;
+        }
+
+        .modal-school-image {
+            width: 100%;
+            height: 300px;
+            object-fit: cover;
+        }
+
+        .modal-body {
+            padding: 30px;
+        }
+
+        .modal-school-name {
+            font-size: 28px;
+            margin-bottom: 10px;
+            color: var(--text-color);
+        }
+
+        .modal-school-info {
+            display: flex;
+            gap: 30px;
+            margin: 20px 0;
+            flex-wrap: wrap;
+        }
+
+        .info-item {
+            min-width: 200px;
+        }
+
+        .info-label {
+            color: var(--light-text);
+            margin-bottom: 5px;
+        }
+
+        .info-value {
+            font-weight: bold;
+            color: var(--text-color);
+        }
+
+        .facilities-list {
+            margin-top: 20px;
+        }
+
+        .facilities-list h3 {
+            margin-bottom: 10px;
+        }
+
+        .facilities-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 15px;
+        }
+
+        .facility-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .rating {
+            color: #f39c12;
+            font-weight: bold;
+        }
+
+        footer {
+            background-color: var(--secondary-color);
+            padding: 30px 0;
+            text-align: center;
+            margin-top: 50px;
+        }
+
+        @media (max-width: 768px) {
+            .schools-grid {
+                grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            }
+
+            .header-content {
+                flex-direction: column;
+                gap: 15px;
+            }
+
+            .modal-content {
+                margin: 20px auto;
+                width: 95%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container header-content">
+            <a href="#" class="logo">School Nation</a>
+            <div class="nav-links">
+                
+            </div>
+        </div>
+    </header>
+
+    <section class="hero">
+        <div class="container">
+            <h1>Find the Best Schools in Your City</h1>
+            <div class="search-container">
+                <input type="text" class="search-input" placeholder="Search for schools or cities...">
+                <button class="search-button">Search</button>
+            </div>
+            
+           
+            </div>
+            <div class="filter-container">
+                <div class="filter-option">
+                    <select>
+                        <option>Sort By</option>
+                        <option>Fees (Low to High)</option>
+                        <option>Fees (High to Low)</option>
+                        
+                    </select>
+                </div>
+                <div class="filter-option">
+                    <select>
+                        <option>School Board</option>
+                        <option>CBSE</option>
+                        <option>ICSE</option>
+                        <option>State Board</option>
+                        
+                    </select>
+                    
+                </div>
+
+            </div>
+        </div>
+          <div class="search-section">
+            <div class="search-group">
+                <label for="city">Select City</label>
+                <select id="city" class="city-select">
+                    <option value="">All Cities</option>
+                    <!--UTTAR PRADESH  CITIES-->
+<option value="Agra">Agra</option>
+<option value="Aligarh">Aligarh</option>
+<option value="Budaun">Budaun</option>
+
+                </select>
+            </div>
+    </section>
+
+    <main class="container">
+        <div class="schools-grid" id="schoolsContainer">
+            <!-- School cards will be inserted here by JavaScript -->
+        </div>
+    </main>
+
+    <div class="modal" id="schoolModal">
+        <div class="modal-content">
+            <span class="close-modal">&times;</span>
+            <div class="modal-header">
+                <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/300cfb20-8eb1-4be2-bb09-06a99ddbd350.png" alt="Modern school campus with glass buildings and green spaces" class="modal-school-image">
+            </div>
+            <div class="modal-body">
+                <h2 class="modal-school-name" id="modalSchoolName">School Name</h2>
+                <div class="school-city">
+                    <span id="modalSchoolCity">City Name</span>
+                </div>
+                <div class="modal-school-info">
+                    <div class="info-item">
+                         <div class="info-label">fess</div>
+                          <div class="info-value" id="modalSchoolFees">2000</div>
+                        <div class="info-label">class</div>
+                        <div class="info-value" id="modalSchoolFees">1-12</div>
+                    </div>
+                    <div class="info-item">
+                        <div class="info-label">School Board</div>
+                        <div class="info-value" id="modalSchoolBoard">CBSE</div>
+                    </div>
+                    <div class="info-item">
+                        <div class="info-label">Facilities Score</div>
+                        <div class="info-value">
+                            <span class="rating" id="modalSchoolRating">4.5</span>/5
+                        </div>
+                    </div>
+                </div>
+                <div class="facilities-list">
+                    <h3>Facilities</h3>
+                    <div class="facilities-grid" id="facilitiesList">
+                        <!-- Facilities will be inserted here -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <div class="container">
+            <p>© 2024 School Nation. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Sample school data
+        // Add this code inside the <script> tag
+
+// Select the sort dropdown
+const sortSelect = document.querySelector('.filter-option select');
+
+// Add event listener for sorting
+sortSelect.addEventListener('change', (e) => {
+    const sortBy = e.target.value;
+
+    let sortedSchools;
+    if (sortBy === 'fees (Low to High)') {
+        sortedSchools = [...schools].sort((a, b) => a.fees - b.fees);
+    } else if (sortBy === 'Fees (High to Low)') {
+        sortedSchools = [...schools].sort((a, b) => b.fees - a.fees);
+    } else {
+        sortedSchools = schools; // Default case
+    }
+
+    displaySchools(sortedSchools);
+});
+// Add this code inside the <script> tag
+
+// Select the school board dropdown
+const boardSelect = document.querySelectorAll('.filter-option select')[1];
+
+// Add event listener for school board filtering
+boardSelect.addEventListener('change', (e) => {
+    const selectedBoard = e.target.value;
+
+    let filteredSchools;
+    if (selectedBoard === 'School Board') {
+        filteredSchools = schools; // Show all schools if "School Board" is selected
+    } else {
+        filteredSchools = schools.filter(school => school.board === selectedBoard);
+    }
+
+    displaySchools(filteredSchools);
+});
+
+
+        const schools = [
+            
+        
+            {
+                id: 1,
+                name: "De paul school",
+                city: "Budaun",
+                fees: 1,
+                board: "ICSE",
+                rating: 4.7,
+                facilities: ["Smart Classrooms", "Swimming Pool", "STEM Lab", "Library", "Auditorium"],
+                image: "depaul.jpeg"
+            },
+            {
+                id: 2,
+                name: "islamia inter college",
+                city: "Budaun",
+                fees: 8500,
+                board: "CBSE",
+                rating: 4.3,
+                facilities: ["Computer Lab", "Playground", "Library", "Transport", "Cafeteria"],
+                image: "https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/d526eb67-c632-40f6-af00-014763b9b0f5.png"
+            },
+            {
+                id: 3,
+                name: "mission school",
+                city: "Budaun",
+                fees: 15000,
+                board: "ICSE",
+                rating: 4.8,
+                facilities: ["Music Room", "Art Studio", "Dance Studio", "Smart Classes", "Sports Complex"],
+                image: "https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/994c29ab-45d7-4a80-a88d-af9b65f896a6.png"
+            },
+            {
+                id: 4,
+                name: "Sunshine Elementary",
+                city: "Agra",
+                fees: 7500,
+                board: "State Board",
+                rating: 4.1,
+                facilities: ["Library", "Playground", "Computer Lab", "After-school Care"],
+                image: "https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/f3327d7f-0d7a-40e9-9026-d3c83907eda5.png"
+            },
+            {
+                id: 5,
+                name: "Oakridge High School",
+                city: "Aligarh",
+                fees: 9000,
+                board: "CBSE",
+                rating: 4.4,
+                facilities: ["Science Labs", "Sports Fields", "Auditorium", "Transport"],
+                image: "https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/dc8bed31-6f93-4dc9-a7db-30469d14d5f6.png"
+            },
+            {
+                id: 6,
+                name: "APS School",
+                city: "Aligarh",
+                fees: 14000,
+                board: "CBSE",
+                rating: 4.6,
+                facilities: ["Olympic Pool", "Tennis Courts", "Art Center", "Drama Studio"],
+                image: "https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/b28bc15c-6e72-48d8-8ca6-b1a1bd865455.png"
+            }
+        ];
+           // Select the city dropdown
+   const citySelect = document.getElementById('city');
+
+   // Add event listener for city selection
+   citySelect.addEventListener('change', (e) => {
+       const selectedCity = e.target.value;
+
+       let filteredSchools;
+       if (selectedCity === "") {
+           filteredSchools = schools; // Show all schools if "All Cities" is selected
+       } else {
+           filteredSchools = schools.filter(school => school.city === selectedCity);
+       }
+
+       displaySchools(filteredSchools);
+   });
+   
+
+        // DOM Elements
+        const schoolsContainer = document.getElementById('schoolsContainer');
+        const searchInput = document.querySelector('.search-input');
+        const cityButtons = document.querySelectorAll('.city-btn');
+        const modal = document.getElementById('schoolModal');
+        const closeModal = document.querySelector('.close-modal');
+
+        // Display all schools initially
+        displaySchools(schools);
+
+        // Search functionality
+        searchInput.addEventListener('input', (e) => {
+            const searchTerm = e.target.value.toLowerCase();
+            const filteredSchools = schools.filter(school => 
+                school.name.toLowerCase().includes(searchTerm) || 
+                school.city.toLowerCase().includes(searchTerm)
+            );
+            displaySchools(filteredSchools);
+        });
+
+        // City filter functionality
+        cityButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                cityButtons.forEach(btn => btn.classList.remove('active'));
+                button.classList.add('active');
+                
+               
+            });
+        });
+
+        // Display schools function
+        function displaySchools(schoolsToDisplay) {
+            schoolsContainer.innerHTML = '';
+            
+            schoolsToDisplay.forEach(school => {
+                const schoolCard = document.createElement('div');
+                schoolCard.className = 'school-card';
+                schoolCard.innerHTML = `
+                    <img src="${school.image}" alt="${school.name} in ${school.city}" class="school-image">
+                    <div class="school-info">
+                        <h3 class="school-name">${school.name}</h3>
+                        <div class="school-city">
+                            <span>${school.city}</span>
+                        </div>
+                        <div class="school-details">
+                            <div class="detail-item">
+                                <div class="detail-label">Fees</div>
+                                <div class="detail-value">$${school.fees.toLocaleString()}</div>
+                            </div>
+                            <div class="detail-item">
+                                <div class="detail-label">Board</div>
+                                <div class="detail-value">${school.board}</div>
+                            </div>
+                            <div class="detail-item">
+                                <div class="detail-label">Rating</div>
+                                <div class="detail-value">${school.rating}</div>
+                            </div>
+                        </div>
+                    </div>
+                `;
+                schoolCard.addEventListener('click', () => openSchoolModal(school));
+                schoolsContainer.appendChild(schoolCard);
+            });
+        }
+
+        // Open school modal
+        function openSchoolModal(school) {
+            document.getElementById('modalSchoolName').textContent = school.name;
+            document.getElementById('modalSchoolCity').textContent = school.city;
+    
+            document.getElementById('modalSchoolBoard').textContent = school.board;
+            document.getElementById('modalSchoolRating').textContent = school.rating;
+            document.querySelector('.modal-school-image').src = school.image;
+            document.querySelector('.modal-school-image').alt = `${school.name} campus in ${school.city}`;
+
+            
+            const facilitiesList = document.getElementById('facilitiesList');
+            facilitiesList.innerHTML = '';
+            
+            school.facilities.forEach(facility => {
+                const facilityItem = document.createElement('div');
+                facilityItem.className = 'facility-item';
+                facilityItem.innerHTML = `
+                    <span>✓</span>
+                    <span>${facility}</span>
+                `;
+                facilitiesList.appendChild(facilityItem);
+            });
+            
+            modal.style.display = 'block';
+        }
+
+        // Close modal
+        closeModal.addEventListener('click', () => {
+            modal.style.display = 'none';
+        });
+
+        // Close modal when clicking outside
+        window.addEventListener('click', (e) => {
+            if (e.target === modal) {
+                modal.style.display = 'none';
+            }
+        });
+
+        // Initialize with sorting by rating
+        window.addEventListener('load', () => {
+            const sortedSchools = [...schools].sort((a, b) => b.rating - a.rating);
+            displaySchools(sortedSchools);
+        });
+    </script>
+</body>
+</html>
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Hamburger Menu</title>
+<style>
+  body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    background: #f5f5f5;
+  }
+
+  /* Navbar */
+  .navbar {
+    background: #f3f3f3;
+    padding: 10px 20px;
+    color: white;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .navbar h1 {
+    font-size: 20px;
+    margin: 0;
+  }
+
+  /* Hamburger Icon */
+    .hamburger {
+      cursor: pointer;
+      width: 30px;
+      height: 22px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      position: fixed;
+      top: 15px;
+      right: 20px;
+      z-index: 1000;
+    }
+
+    .hamburger div {
+      height: 4px;
+      background: rgb(10, 10, 10);
+      border-radius: 2px;
+      transition: 0.4s;
+    }
+
+    /* Menu */
+    .menu {
+      position: fixed;
+      top: 0;
+      right: -200px;
+      height: 100%;
+      width: 200px;
+      background: #fdfdfd;
+      padding-top: 60px;
+      display: flex;
+      flex-direction: column;
+      transition: 0.4s ease;
+      z-index: 999;
+    }
+
+    .menu a {
+      color: #1b1b1b;
+      padding: 15px 20px;
+      text-decoration: none;
+      font-size: 18px;
+      transition: background 0.3s;
+    }
+
+    .menu a:hover {
+      background: #3498db;
+    }
+
+    /* Active Menu */
+    .menu.active {
+      right: 0;
+    }
+
+    /* Change hamburger to cross */
+    .hamburger.active div:nth-child(1) {
+      transform: rotate(45deg) translate(5px, 5px);
+    }
+    .hamburger.active div:nth-child(2) {
+      opacity: 0;
+    }
+    .hamburger.active div:nth-child(3) {
+      transform: rotate(-45deg) translate(6px, -6px);
+    }
+  </style>
+</head>
+<body>
+
+<div class="navbar">
+  <h1>My Website</h1>
+</div>
+
+<div class="hamburger" id="hamburger">
+  <div></div>
+  <div></div>
+  <div></div>
+</div>
+
+<div class="menu" id="menu">
+  <a href="index.html">Homepage</a>
+  <a href="about.html">About</a>
+  <a href="#">Contact</a>
+  <a href="#">FAQ</a>
+</div>
+
+<script>
+  const hamburger = document.getElementById('hamburger');
+  const menu = document.getElementById('menu');
+
+  hamburger.addEventListener('click', () => {
+    hamburger.classList.toggle('active');
+    menu.classList.toggle('active');
+  });
+</script>
+
+</body>
+</html>
