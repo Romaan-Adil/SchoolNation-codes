@@ -75,11 +75,12 @@ document.addEventListener('DOMContentLoaded', function() {
             const mobileMenu = document.getElementById('mobile-menu');
             const hamburgerBtn = document.getElementById('hamburger-btn');
             
-            mobileMenu.classList.add('close menu');
+            mobileMenu.classList.add('hidden');
             hamburgerBtn.classList.remove('hamburger-active');
         });
     });
 
 });
+
 
 
