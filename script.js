@@ -6,14 +6,14 @@ document.addEventListener('DOMContentLoaded', function() {
     if (hamburgerBtn && mobileMenu) {
         hamburgerBtn.addEventListener('click', function(e) {
             e.stopPropagation();
-            mobileMenu.classList.toggle('hidden');
-            hamburgerBtn.classList.toggle('hamburger-active');
+            mobileMenu.classList.toggle('active');
+            hamburgerBtn.classList.toggle('animate button');
         });
         
         // Close menu when clicking outside
         document.addEventListener('click', function(e) {
             if (!hamburgerBtn.contains(e.target) && !mobileMenu.contains(e.target)) {
-                mobileMenu.classList.add('hidden');
+                mobileMenu.classList.add('close menu');
                 hamburgerBtn.classList.remove('hamburger-active');
             }
         });
@@ -75,8 +75,9 @@ document.addEventListener('DOMContentLoaded', function() {
             const mobileMenu = document.getElementById('mobile-menu');
             const hamburgerBtn = document.getElementById('hamburger-btn');
             
-            mobileMenu.classList.add('hidden');
+            mobileMenu.classList.add('close menu');
             hamburgerBtn.classList.remove('hamburger-active');
         });
     });
+
 });
