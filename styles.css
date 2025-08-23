@@ -558,4 +558,9 @@ body {
     .nav-container, .hero-container, .overview-container, .cities-container, .footer-container {
         padding: 0 2rem;
     }
+
+}
+/* Mobile menu toggle fix */
+.mobile-menu.active {
+    display: block;
 }
