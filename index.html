@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SchoolNation - Find the Best Schools for Your Child</title>
+    <meta name="description" content="Find the best school for your Child in your city">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body class="antialiased">
+    <!-- Navigation -->
+    <nav class="nav">
+        <div class="nav-container">
+            <div class="nav-flex">
+                <div class="nav-logo">
+                    <h1 class="logo-text">
+                        <span class="logo-blue">School</span><span class="logo-black">Nation</span>
+                    </h1>
+                </div>
+                
+                <div class="nav-menu">
+                    <a href="#" class="nav-link">Home</a>
+                    <a href="#" class="nav-link">Schools</a>
+                    <a href="#" class="nav-link">Cities</a>
+                    <a href="#" class="nav-link">About</a>
+                    <a href="#" class="nav-link">Contact</a>
+                </div>
+                
+                <div class="nav-hamburger">
+                    <button id="hamburger-btn" class="hamburger-btn">
+                        <div class="hamburger-icon">
+                            <div class="hamburger-line"></div>
+                            <div class="hamburger-line"></div>
+                            <div class="hamburger-line"></div>
+                        </div>
+                    </button>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="mobile-menu">
+            <div class="mobile-menu-container">
+                <a href="#" class="mobile-nav-link">Home</a>
+                <a href="#" class="mobile-nav-link">Schools</a>
+                <a href="#" class="mobile-nav-link">Cities</a>
+                <a href="#" class="mobile-nav-link">About</a>
+                <a href="#" class="mobile-nav-link">Contact</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-container">
+            <div class="hero-content">
+                <h1 class="hero-title">Discover the Perfect School for Your Child's Future</h1>
+                <p class="hero-description">
+                    Find the best educational institutions in your city with our comprehensive school database. 
+                    Compare ratings, facilities, and programs to make the right choice for your child's education.
+                </p>
+                
+                <!-- Search Bar -->
+                <div class="search-container">
+                    <div class="search-flex">
+                        <input type="text" placeholder="Enter your city..." class="search-input">
+                        <input type="text" placeholder="Search for schools..." class="search-input">
+                        <button class="search-btn">
+                            <i class="fas fa-search mr-2"></i>Search
+                        </button>
+                    </div>
+                </div>
+                
+                <div class="hero-features">
+                    <span class="feature-item">
+                        <i class="fas fa-check-circle feature-icon"></i>10,000+ Schools
+                    </span>
+                    <span class="feature-item">
+                        <i class="fas fa-check-circle feature-icon"></i>500+ Cities
+                    </span>
+                    <span class="feature-item">
+                        <i class="fas fa-check-circle feature-icon"></i>Verified Reviews
+                    </span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Overview Section -->
+    <section class="overview">
+        <div class="overview-container">
+            <div class="overview-header">
+                <h2 class="overview-title">Why Choose SchoolNation?</h2>
+                <p class="overview-description">
+                    We provide comprehensive school information to help parents make informed decisions 
+                    about their children's education journey.
+                </p>
+            </div>
+            
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon-container">
+                        <i class="fas fa-graduation-cap feature-card-icon"></i>
+                    </div>
+                    <h3 class="feature-card-title">Comprehensive Database</h3>
+                    <p class="feature-card-text">Access detailed information about schools, including academic programs, facilities, and extracurricular activities.</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon-container">
+                        <i class="fas fa-star feature-card-icon"></i>
+                    </div>
+                    <h3 class="feature-card-title">Verified Reviews</h3>
+                    <p class="feature-card-text">Read authentic reviews from parents and students to get real insights about school quality and environment.</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon-container">
+                        <i class="fas fa-chart-line feature-card-icon"></i>
+                    </div>
+                    <h3 class="feature-card-title">Performance Metrics</h3>
+                    <p class="feature-card-text">Compare schools based on academic performance, teacher-student ratios, and other important metrics.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Top Cities Section -->
+    <section class="cities">
+        <div class="cities-container">
+            <div class="cities-header">
+                <h2 class="cities-title">Explore Top Cities</h2>
+                <p class="cities-description">
+                    Discover the best schools in these popular educational hubs across the country
+                </p>
+            </div>
+            
+            <div class="cities-grid">
+                <!-- City Cards -->
+                <div class="city-card">
+                    <div class="city-icon-container">
+                        <i class="fas fa-city city-icon"></i>
+                    </div>
+                    <h3 class="city-name">Mumbai</h3>
+                    <p class="city-schools">1000+ Schools</p>
+                    <span class="city-explore">Explore →</span>
+                </div>
+                
+                <div class="city-card">
+                    <div class="city-icon-container">
+                        <i class="fas fa-city city-icon"></i>
+                    </div>
+                    <h3 class="city-name">Delhi</h3>
+                    <p class="city-schools">950+ Schools</p>
+                    <span class="city-explore">Explore →</span>
+                </div>
+                
+                <div class="city-card">
+                    <div class="city-icon-container">
+                        <i class="fas fa-city city-icon"></i>
+                    </div>
+                    <h3 class="city-name">Bangalore</h3>
+                    <p class="city-schools">800+ Schools</p>
+                    <span class="city-explore">Explore →</span>
+                </div>
+                
+                <div class="city-card">
+                    <div class="city-icon-container">
+                        <i class="fas fa-city city-icon"></i>
+                    </div>
+                    <h3 class="city-name">Kolkata</h3>
+                    <p class="city-schools">700+ Schools</p>
+                    <span class="city-explore">Explore →</span>
+                </div>
+                
+                <div class="city-card">
+                    <div class="city-icon-container">
+                        <i class="fas fa-city city-icon"></i>
+                    </div>
+                    <h3 class="city-name">Hyderabad</h3>
+                    <p class="city-schools">550+ Schools</p>
+                    <span class="city-explore">Explore →</span>
+                </div>
+                
+                <div class="city-card">
+                    <div class="city-icon-container">
+                        <i class="fas fa-city city-icon"></i>
+                    </div>
+                    <h3 class="city-name">Chennai</h3>
+                    <p class="city-schools">600+ Schools</p>
+                    <span class="city-explore">Explore →</span>
+                </div>
+                
+                <div class="city-card">
+                    <div class="city-icon-container">
+                        <i class="fas fa-city city-icon"></i>
+                    </div>
+                    <h3 class="city-name">Ahmedabad</h3>
+                    <p class="city-schools">450+ Schools</p>
+                    <span class="city-explore">Explore →</span>
+                </div>
+                
+                <div class="city-card">
+                    <div class="city-icon-container">
+                        <i class="fas fa-city city-icon"></i>
+                    </div>
+                    <h3 class="city-name">Pune</h3>
+                    <p class="city-schools">400+ Schools</p>
+                    <span class="city-explore">Explore →</span>
+                </div>
+            </div>
+            
+            <div class="cities-cta">
+                <button class="cta-btn">
+                    View All Cities
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <h3 class="footer-logo">
+                        <span class="footer-logo-blue">School</span><span class="footer-logo-white">Nation</span>
+                    </h3>
+                    <p class="footer-description">
+                        Helping parents find the perfect educational environment for their children's future success.
+                    </p>
+                    <div class="footer-social">
+                        <a href="#" class="social-link">
+                            <i class="fab fa-facebook-f"></i>
+                        </a>
+                        <a href="#" class="social-link">
+                            <i class="fab fa-twitter"></i>
+                        </a>
+                        <a href="#" class="social-link">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                        <a href="#" class="social-link">
+                            <i class="fab fa-linkedin-in"></i>
+                        </a>
+                    </div>
+                </div>
+                
+                <div class="footer-col">
+                    <h4 class="footer-title">Quick Links</h4>
+                    <ul class="footer-links">
+                        <li><a href="#" class="footer-link">Home</a></li>
+                        <li><a href="#" class="footer-link">Schools Directory</a></li>
+                        <li><a href="#" class="footer-link">City Guides</a></li>
+                        <li><a href="#" class="footer-link">School Rankings</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-col">
+                    <h4 class="footer-title">Resources</h4>
+                    <ul class="footer-links">
+                        <li><a href="#" class="footer-link">Education Blog</a></li>
+                        <li><a href="#" class="footer-link">Parent Guides</a></li>
+                        <li><a href="#" class="footer-link">Admission Process</a></li>
+                        <li><a href="#" class="footer-link">School Reviews</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-col">
+                    <h4 class="footer-title">Contact Us</h4>
+                    <ul class="footer-contact">
+                        <li class="contact-item">
+                            <i class="fas fa-envelope contact-icon"></i>info@schooldnation.com
+                        </li>
+                        <li class="contact-item">
+                            <i class="fas fa-phone contact-icon"></i>+1 (555) 123-4567
+                        </li>
+                        <li class="contact-item">
+                            <i class="fas fa-map-marker-alt contact-icon"></i>123 Education St, Learning City
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p class="footer-copyright">
+                    © 2024 SchoolNation. All rights reserved. | 
+                    <a href="#" class="footer-bottom-link">Privacy Policy</a> | 
+                    <a href="#" class="footer-bottom-link">Terms of Service</a>
+                </p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
