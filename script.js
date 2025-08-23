@@ -7,14 +7,14 @@ document.addEventListener('DOMContentLoaded', function() {
         hamburgerBtn.addEventListener('click', function(e) {
             e.stopPropagation();
             mobileMenu.classList.toggle('active');
-            hamburgerBtn.classList.toggle('animate button');
+            hamburgerBtn.classList.toggle('hamburger-active');
         });
         
         // Close menu when clicking outside
         document.addEventListener('click', function(e) {
             if (!hamburgerBtn.contains(e.target) && !mobileMenu.contains(e.target)) {
-                mobileMenu.classList.add('close menu');
-                hamburgerBtn.classList.remove('hamburger-active');
+                mobileMenu.classList.add('hidden');
+                hamburgerBtn.classList.remove('hidden');
             }
         });
         
@@ -81,3 +81,4 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 
 });
+
